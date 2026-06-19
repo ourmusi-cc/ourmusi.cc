@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const artists = await getCollection('artists');
+  return artists.map(artist => ({ params: { id: artist.data.id } }));
+}
+
+const { id } = Astro.params;
+const artist = await getEntry('artists', id);
+if (!artist) return Astro.redirect('/artists');
+
+const allReleases = await getCollection('releases');
+const releases = allReleases
+  .filter(r => r.data.artist_id === id && r.data.status === 'live')
+  .sort((a, b) => {
+    const dateA = a.data.dates?.released ?? '';
+    const dateB = b.data.dates?.released ?? '';
+    return dateB.localeCompare(dateA);
+  });
+
+const { data: a } = artist;
+
+const platformLinks = [
+  a.platforms?.bandcamp_url      && { label: 'Bandcamp',      url: a.platforms.bandcamp_url },
+  a.platforms?.spotify_artist_id && { label: 'Spotify',       url: `https://open.spotify.com/artist/${a.platforms.spotify_artist_id}` },
+  a.platforms?.apple_music_artist_id && { label: 'Apple Music', url: `https://music.apple.com/artist/${a.platforms.apple_music_artist_id}` },
+  a.platforms?.soundcloud_url    && { label: 'SoundCloud',    url: a.platforms.soundcloud_url },
+  a.platforms?.subvert_fm_url    && { label: 'Subvert.fm',    url: a.platforms.subvert_fm_url },
+  a.platforms?.youtube_channel_id && { label: 'YouTube',      url: `https://www.youtube.com/channel/${a.platforms.youtube_channel_id}` },
+  a.platforms?.instagram_handle  && { label: 'Instagram',     url: `https://instagram.com/${a.platforms.instagram_handle}` },
+  a.platforms?.facebook_url      && { label: 'Facebook',      url: a.platforms.facebook_url },
+].filter(Boolean) as { label: string; url: string }[];
+---
+
+<Layout title={`${a.display_name} — OurMusi.cc`} description={a.bio.short}>
+
+  <!-- Header -->
+  <header class="border-b border-border px-6 py-5 flex items-center justify-between">
+    <a href="/" class="text-base font-semibold tracking-tight text-foreground">OurMusi.cc</a>
+    <nav class="flex gap-6 text-sm text-muted">
+      <a href="/artists"   class="hover:text-foreground transition-colors">Artists</a>
+      <a href="/releases"  class="hover:text-foreground transition-colors">Releases</a>
+      <a href="/about"     class="hover:text-foreground transition-colors">About</a>
+      <a href="/licensing" class="hover:text-foreground transition-colors">Licensing</a>
+    </nav>
+  </header>
+
+  <main class="px-6 py-16 max-w-3xl">
+
+    <!-- Breadcrumb -->
+    <p class="text-sm text-subtle mb-8">
+      <a href="/artists" class="hover:text-muted transition-colors">Artists</a>
+      <span class="mx-2">›</span>
+      <span class="text-muted">{a.display_name}</span>
+    </p>
+
+    <!-- Name + tags -->
+    <h1 class="text-3xl font-light tracking-tight text-foreground mb-3">{a.display_name}</h1>
+    {a.genre_tags && (
+      <div class="flex flex-wrap gap-1.5 mb-8">
+        {a.genre_tags.map(tag => (
+          <span class="text-xs text-subtle bg-surface px-2.5 py-1 rounded border border-border">{tag}</span>
+        ))}
+      </div>
+    )}
+
+    <!-- Bio -->
+    <p class="text-base text-muted leading-relaxed mb-10">{a.bio.medium ?? a.bio.short}</p>
+
+    <!-- Platform links -->
+    {platformLinks.length > 0 && (
+      <div class="flex flex-wrap gap-3 mb-16">
+        {platformLinks.map(({ label, url }) => (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-muted border border-border px-4 py-1.5 rounded hover:border-accent-dim hover:text-foreground transition-colors"
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    )}
+
+    <!-- Releases -->
+    <section>
+      <h2 class="text-xs uppercase tracking-widest text-subtle mb-6">Discography</h2>
+      <div class="grid gap-0">
+        {releases.map(release => (
+          <a
+            href={`/releases/${release.data.artist_id}/${release.data.id}`}
+            class="group flex items-baseline justify-between border-b border-border-muted py-3 hover:bg-surface px-3 -mx-3 rounded transition-colors"
+          >
+            <div class="flex items-baseline gap-4">
+              <span class="font-medium text-foreground">{release.data.title}</span>
+              <span class="text-sm text-subtle capitalize">{release.data.release_type}</span>
+            </div>
+            <span class="text-sm text-subtle tabular-nums shrink-0">
+              {release.data.dates?.released?.slice(0, 4) ?? ''}
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- License note -->
+    {a.default_license && (
+      <p class="mt-12 text-sm text-subtle">
+        All releases under <a href="/licensing" class="text-muted hover:text-foreground underline underline-offset-2 transition-colors">{a.default_license}</a>.
+      </p>
+    )}
+
+  </main>
+
+</Layout>

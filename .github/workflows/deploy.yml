@@ -1,0 +1,41 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Sync workspace content into Astro collections
+        # Copies OVL workspace JSON records into src/content/ before the build.
+        # The workspace/ directory lives at the repo root (three levels up from the site).
+        run: bash scripts/sync-content.sh
+        working-directory: workspace/site/ourmusi.cc
+
+      - name: Install, build, and upload site
+        uses: withastro/action@v3
+        with:
+          path: workspace/site/ourmusi.cc
+          node-version: 22
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

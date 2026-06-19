@@ -1,0 +1,146 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const artists = await getCollection('artists');
+---
+
+<Layout
+  title="About — OurMusi.cc"
+  description="OurMusi.cc is an independent label for artists publishing music under Creative Commons licenses, with a preference for Free Cultural Works."
+>
+
+  <!-- Header -->
+  <header class="border-b border-border px-6 py-5 flex items-center justify-between">
+    <a href="/" class="text-base font-semibold tracking-tight text-foreground">OurMusi.cc</a>
+    <nav class="flex gap-6 text-sm text-muted">
+      <a href="/artists"   class="hover:text-foreground transition-colors">Artists</a>
+      <a href="/releases"  class="hover:text-foreground transition-colors">Releases</a>
+      <a href="/about"     class="text-foreground">About</a>
+      <a href="/licensing" class="hover:text-foreground transition-colors">Licensing</a>
+    </nav>
+  </header>
+
+  <main class="px-6 py-16 max-w-2xl">
+
+    <h1 class="text-3xl font-light tracking-tight text-foreground mb-10">About OurMusi.cc</h1>
+
+    <!-- Mission -->
+    <section class="mb-12">
+      <h2 class="text-xs uppercase tracking-widest text-subtle mb-4">What we are</h2>
+      <p class="text-muted leading-relaxed mb-4">
+        OurMusi.cc is an independent label for artists who release music under
+        <a
+          href="https://creativecommons.org/licenses/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-foreground underline underline-offset-2 hover:text-accent transition-colors"
+        >Creative Commons</a> licenses.
+        We believe music is more valuable when it can move freely — into podcasts, films,
+        games, classrooms, and community spaces — with nothing required from the listener
+        beyond giving credit.
+      </p>
+      <p class="text-muted leading-relaxed">
+        The label exists to make that music findable, presentable, and properly documented,
+        without asking artists to give up control over their work.
+      </p>
+    </section>
+
+    <!-- Free Cultural Works -->
+    <section class="mb-12 border-l-2 border-accent-dim pl-6">
+      <h2 class="text-xs uppercase tracking-widest text-subtle mb-4">Free Cultural Works</h2>
+      <p class="text-muted leading-relaxed mb-4">
+        We have a preference for releases that qualify as
+        <a
+          href="https://freedomdefined.org/Definition"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-foreground underline underline-offset-2 hover:text-accent transition-colors"
+        >Free Cultural Works</a> — a standard that goes a step further than standard Creative Commons.
+        A work qualifies when it can be freely used, studied, copied, modified, and redistributed
+        by anyone, for any purpose, without restriction.
+      </p>
+      <p class="text-muted leading-relaxed mb-4">
+        In Creative Commons terms, this means licenses that do not include the
+        <span class="text-foreground">NoDerivatives (ND)</span> or
+        <span class="text-foreground">NonCommercial (NC)</span> restrictions.
+        The licenses that meet the standard are:
+      </p>
+      <ul class="space-y-2 mb-4">
+        {[
+          { name: 'CC BY 4.0', desc: 'Attribution only — the most open option', url: 'https://creativecommons.org/licenses/by/4.0/' },
+          { name: 'CC BY-SA 4.0', desc: 'Attribution + ShareAlike — derivatives must use the same license', url: 'https://creativecommons.org/licenses/by-sa/4.0/' },
+          { name: 'CC0', desc: 'Public domain dedication — no rights reserved', url: 'https://creativecommons.org/publicdomain/zero/1.0/' },
+        ].map(({ name, desc, url }) => (
+          <li class="flex items-baseline gap-3">
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm font-medium text-foreground underline underline-offset-2 hover:text-accent transition-colors shrink-0"
+            >{name}</a>
+            <span class="text-sm text-subtle">{desc}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="text-muted leading-relaxed">
+        Most music on this label is released under <strong class="text-foreground font-medium">CC BY 4.0</strong>,
+        which means you can use it freely in any project as long as you credit the artist.
+      </p>
+    </section>
+
+    <!-- Artists -->
+    <section class="mb-12">
+      <h2 class="text-xs uppercase tracking-widest text-subtle mb-4">Our Artists</h2>
+      <p class="text-muted leading-relaxed mb-6">
+        Currently home to {artists.length} artist{artists.length !== 1 ? 's' : ''} across ambient,
+        piano, electronic, and experimental music.
+      </p>
+      <div class="flex flex-col gap-2">
+        {artists.map(artist => (
+          <a
+            href={`/artists/${artist.data.id}`}
+            class="group flex items-baseline justify-between border-b border-border-muted py-3 hover:bg-surface px-3 -mx-3 rounded transition-colors"
+          >
+            <span class="text-foreground font-medium">{artist.data.display_name}</span>
+            <span class="text-subtle text-sm group-hover:text-muted transition-colors">
+              {artist.data.genre_tags?.slice(0, 2).join(', ')}
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Join -->
+    <section class="mb-12">
+      <h2 class="text-xs uppercase tracking-widest text-subtle mb-4">Join the label</h2>
+      <p class="text-muted leading-relaxed mb-4">
+        If you release music under a Free Cultural Works license and would like to be listed here,
+        get in touch. We're particularly interested in ambient, instrumental, and experimental work,
+        though any genre is welcome.
+      </p>
+      <a
+        href="mailto:brylie.oxley@gmail.com?subject=OurMusi.cc%20artist%20inquiry"
+        class="inline-block text-sm border border-border rounded-lg px-4 py-2.5 text-muted bg-surface hover:bg-surface-raised hover:border-accent-dim hover:text-foreground transition-colors"
+      >
+        Get in touch →
+      </a>
+    </section>
+
+    <!-- Label itself -->
+    <section>
+      <h2 class="text-xs uppercase tracking-widest text-subtle mb-4">This site</h2>
+      <p class="text-muted leading-relaxed">
+        OurMusi.cc is built with
+        <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">Astro</a>
+        and managed with
+        <a href="https://github.com/open-virtual-label/ovl" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">Open Virtual Label</a>,
+        an open-source tool for independent musicians.
+        The site's code is MIT licensed; all content is
+        <a href="/licensing" class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">CC BY 4.0</a>.
+      </p>
+    </section>
+
+  </main>
+
+</Layout>

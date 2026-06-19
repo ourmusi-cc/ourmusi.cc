@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Licensing — OurMusi.cc"
+  description="How Creative Commons licensing works for music on OurMusi.cc, and what you can do with it."
+>
+
+  <!-- Header -->
+  <header class="border-b border-border px-6 py-5 flex items-center justify-between">
+    <a href="/" class="text-base font-semibold tracking-tight text-foreground">OurMusi.cc</a>
+    <nav class="flex gap-6 text-sm text-muted">
+      <a href="/artists"   class="hover:text-foreground transition-colors">Artists</a>
+      <a href="/releases"  class="hover:text-foreground transition-colors">Releases</a>
+      <a href="/about"     class="hover:text-foreground transition-colors">About</a>
+      <a href="/licensing" class="text-foreground">Licensing</a>
+    </nav>
+  </header>
+
+  <main class="px-6 py-16 max-w-2xl">
+
+    <h1 class="text-3xl font-light tracking-tight text-foreground mb-4">Licensing</h1>
+    <p class="text-muted leading-relaxed mb-12">
+      All music on OurMusi.cc is released under
+      <a href="https://creativecommons.org" target="_blank" rel="noopener noreferrer"
+         class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">Creative Commons</a>
+      licenses. Here's what that means in practice.
+    </p>
+
+    <!-- The short version -->
+    <section class="mb-12">
+      <h2 class="text-xs uppercase tracking-widest text-subtle mb-4">The short version</h2>
+      <p class="text-muted leading-relaxed mb-4">
+        You can use this music in your project — podcast, film, game, video, classroom, live event —
+        without asking permission first. The one requirement is attribution: credit the artist by name
+        and note the license.
+      </p>
+      <p class="text-muted leading-relaxed">
+        That's it for most of our releases. Some licenses add a condition or two, described below.
+      </p>
+    </section>
+
+    <!-- License types -->
+    <section class="mb-12">
+      <h2 class="text-xs uppercase tracking-widest text-subtle mb-6">License types used here</h2>
+
+      <div class="flex flex-col gap-px border border-border rounded-xl overflow-hidden">
+
+        <!-- CC BY -->
+        <div class="bg-surface px-6 py-5">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-medium text-foreground">CC BY 4.0</h3>
+            <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer"
+               class="text-xs text-subtle hover:text-muted transition-colors">Full license ↗</a>
+          </div>
+          <p class="text-sm text-muted leading-relaxed mb-3">
+            Use, share, remix, or build on the work for any purpose — including commercially —
+            as long as you credit the artist and indicate if you made changes.
+          </p>
+          <p class="text-xs text-subtle">Used by most releases on this label.</p>
+        </div>
+
+        <div class="border-t border-border"></div>
+
+        <!-- CC BY-SA -->
+        <div class="bg-surface px-6 py-5">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-medium text-foreground">CC BY-SA 4.0</h3>
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer"
+               class="text-xs text-subtle hover:text-muted transition-colors">Full license ↗</a>
+          </div>
+          <p class="text-sm text-muted leading-relaxed mb-3">
+            Same as CC BY, with one addition: if you remix or adapt the work, your version must
+            be released under the same license.
+          </p>
+          <p class="text-xs text-subtle">A copyleft license — derivatives stay free.</p>
+        </div>
+
+        <div class="border-t border-border"></div>
+
+        <!-- CC0 -->
+        <div class="bg-surface px-6 py-5">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-medium text-foreground">CC0</h3>
+            <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer"
+               class="text-xs text-subtle hover:text-muted transition-colors">Full license ↗</a>
+          </div>
+          <p class="text-sm text-muted leading-relaxed mb-3">
+            The artist waives all rights. No attribution required. Use it however you like.
+          </p>
+          <p class="text-xs text-subtle">Equivalent to public domain.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- How to attribute -->
+    <section class="mb-12">
+      <h2 class="text-xs uppercase tracking-widest text-subtle mb-4">How to give credit</h2>
+      <p class="text-muted leading-relaxed mb-4">
+        Attribution doesn't need to be elaborate. A short credit line is enough:
+      </p>
+      <div class="bg-surface border border-border rounded-lg px-5 py-4 mb-4">
+        <p class="text-sm text-foreground font-mono leading-relaxed">
+          "Epicycles" by Brylie Christopher, licensed under CC BY 4.0.<br />
+          <span class="text-subtle">https://creativecommons.org/licenses/by/4.0/</span>
+        </p>
+      </div>
+      <p class="text-sm text-muted leading-relaxed">
+        In video, a credit in the description or end screen works. In a podcast, a brief mention
+        or show notes credit is fine. The goal is that someone who hears the music can trace it back
+        to the artist.
+      </p>
+    </section>
+
+    <!-- What you don't need to do -->
+    <section class="mb-12">
+      <h2 class="text-xs uppercase tracking-widest text-subtle mb-4">What you don't need to do</h2>
+      <p class="text-muted leading-relaxed">
+        You don't need to ask permission, sign anything, or pay a fee. You don't need to share
+        your project with the artist (though they'd probably enjoy hearing about it). You don't need
+        to register anywhere or use a specific platform.
+      </p>
+    </section>
+
+    <!-- Questions -->
+    <section>
+      <h2 class="text-xs uppercase tracking-widest text-subtle mb-4">Questions</h2>
+      <p class="text-muted leading-relaxed">
+        If you're unsure whether your use is covered, the
+        <a href="https://creativecommons.org/faq/" target="_blank" rel="noopener noreferrer"
+           class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">Creative Commons FAQ</a>
+        answers most cases. You're also welcome to
+        <a href="mailto:brylie.oxley@gmail.com?subject=Licensing%20question"
+           class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">get in touch</a>
+        directly.
+      </p>
+    </section>
+
+  </main>
+
+</Layout>

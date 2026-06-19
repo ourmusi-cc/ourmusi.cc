@@ -1,0 +1,211 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const releases = await getCollection('releases');
+  return releases.map(release => ({
+    params: {
+      artistId: release.data.artist_id,
+      releaseId: release.data.id,
+    },
+  }));
+}
+
+const { artistId, releaseId } = Astro.params;
+const releaseEntry = await getEntry('releases', `${artistId}--${releaseId}`);
+if (!releaseEntry) return Astro.redirect('/releases');
+
+const artistEntry = await getEntry('artists', artistId);
+const { data: r } = releaseEntry;
+const artistName = artistEntry?.data.display_name ?? artistId;
+
+// Extract Spotify album ID from full URL for embed
+const spotifyId = r.store_links?.spotify
+  ? r.store_links.spotify.match(/album\/([A-Za-z0-9]+)/)?.[1]
+  : null;
+
+// SoundCloud embed: works from the full page URL directly
+const soundcloudUrl = r.store_links?.soundcloud ?? null;
+const soundcloudEmbedUrl = soundcloudUrl
+  ? `https://w.soundcloud.com/player/?url=${encodeURIComponent(soundcloudUrl)}&color=%236db872&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true`
+  : null;
+
+// Embed priority: Spotify > SoundCloud > Bandcamp link-out
+const showSpotifyEmbed = !!spotifyId;
+const showSoundcloudEmbed = !showSpotifyEmbed && !!soundcloudEmbedUrl;
+const showBandcampFallback = !showSpotifyEmbed && !showSoundcloudEmbed && !!r.store_links?.bandcamp;
+
+// CC license URL
+const licenseUrl = r.license === 'CC BY 4.0'
+  ? 'https://creativecommons.org/licenses/by/4.0/'
+  : `https://creativecommons.org/licenses/${r.license.toLowerCase().replace('cc ', '').replace(' ', '/')}/`;
+
+// Platform link definitions — order reflects listener priority
+const platformLinks = [
+  r.store_links?.bandcamp    && { label: 'Bandcamp',           url: r.store_links.bandcamp },
+  r.store_links?.spotify     && { label: 'Spotify',            url: r.store_links.spotify },
+  r.store_links?.apple_music && { label: 'Apple Music',        url: r.store_links.apple_music },
+  r.store_links?.youtube_music && { label: 'YouTube Music',    url: r.store_links.youtube_music },
+  r.store_links?.soundcloud  && { label: 'SoundCloud',         url: r.store_links.soundcloud },
+  r.store_links?.subvert_fm  && { label: 'Subvert.fm',         url: r.store_links.subvert_fm },
+  r.store_links?.fma         && { label: 'Free Music Archive', url: r.store_links.fma },
+].filter(Boolean) as { label: string; url: string }[];
+
+// JSON-LD
+const albumSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicAlbum',
+  name: r.title,
+  description: r.description?.short,
+  byArtist: { '@type': 'MusicGroup', name: artistName },
+  datePublished: r.dates?.released,
+  albumReleaseType: `https://schema.org/${r.release_type.charAt(0).toUpperCase() + r.release_type.slice(1)}Release`,
+  genre: r.genre_tags,
+  license: licenseUrl,
+  url: Astro.url.href,
+};
+---
+
+<Layout
+  title={`${r.title} — ${artistName} — OurMusi.cc`}
+  description={r.description?.short}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(albumSchema)} />
+
+  <!-- Header -->
+  <header class="border-b border-border px-6 py-5 flex items-center justify-between">
+    <a href="/" class="text-base font-semibold tracking-tight text-foreground">OurMusi.cc</a>
+    <nav class="flex gap-6 text-sm text-muted">
+      <a href="/artists"   class="hover:text-foreground transition-colors">Artists</a>
+      <a href="/releases"  class="hover:text-foreground transition-colors">Releases</a>
+      <a href="/about"     class="hover:text-foreground transition-colors">About</a>
+      <a href="/licensing" class="hover:text-foreground transition-colors">Licensing</a>
+    </nav>
+  </header>
+
+  <main class="px-6 py-16 max-w-3xl">
+
+    <!-- Breadcrumb -->
+    <p class="text-sm text-subtle mb-10">
+      <a href="/artists" class="hover:text-muted transition-colors">Artists</a>
+      <span class="mx-2">›</span>
+      <a href={`/artists/${artistId}`} class="hover:text-muted transition-colors">{artistName}</a>
+      <span class="mx-2">›</span>
+      <span class="text-muted">{r.title}</span>
+    </p>
+
+    <div class="grid gap-12 md:grid-cols-[1fr_280px] md:items-start">
+
+      <!-- Left column: info -->
+      <div>
+        <p class="text-sm text-subtle uppercase tracking-widest mb-2 capitalize">{r.release_type}</p>
+        <h1 class="text-3xl font-light tracking-tight text-foreground mb-1">{r.title}</h1>
+        <p class="text-muted mb-6">
+          <a href={`/artists/${artistId}`} class="hover:text-foreground transition-colors">{artistName}</a>
+          {r.dates?.released && (
+            <span class="text-subtle"> · {r.dates.released.slice(0, 4)}</span>
+          )}
+        </p>
+
+        {r.genre_tags && r.genre_tags.length > 0 && (
+          <div class="flex flex-wrap gap-1.5 mb-8">
+            {r.genre_tags.map(tag => (
+              <span class="text-xs text-subtle bg-surface px-2.5 py-1 rounded border border-border">{tag}</span>
+            ))}
+          </div>
+        )}
+
+        {r.description?.short && (
+          <p class="text-muted leading-relaxed mb-8">{r.description.short}</p>
+        )}
+
+        <!-- Platform links -->
+        {platformLinks.length > 0 && (
+          <div>
+            <h2 class="text-xs uppercase tracking-widest text-subtle mb-4">Listen & Download</h2>
+            <div class="flex flex-col gap-2">
+              {platformLinks.map(({ label, url }) => (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center justify-between border border-border rounded-lg px-4 py-3 bg-surface hover:bg-surface-raised hover:border-accent-dim transition-colors group"
+                >
+                  <span class="text-sm font-medium text-foreground">{label}</span>
+                  <span class="text-subtle group-hover:text-muted transition-colors text-xs">→</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- License -->
+        <p class="mt-10 text-sm text-subtle">
+          Released under{' '}
+          <a
+            href={licenseUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted hover:text-foreground underline underline-offset-2 transition-colors"
+          >
+            {r.license}
+          </a>
+          {' '}— free to use with attribution.
+        </p>
+      </div>
+
+      <!-- Right column: embed player (Spotify > SoundCloud) or Bandcamp link-out -->
+      <div class="md:sticky md:top-8">
+        {showSpotifyEmbed ? (
+          <iframe
+            src={`https://open.spotify.com/embed/album/${spotifyId}?utm_source=generator&theme=0`}
+            width="100%"
+            height="352"
+            frameborder="0"
+            allowfullscreen
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            class="rounded-xl"
+            title={`${r.title} on Spotify`}
+          />
+        ) : showSoundcloudEmbed ? (
+          <iframe
+            width="100%"
+            height="300"
+            src={soundcloudEmbedUrl!}
+            frameborder="0"
+            allow="autoplay"
+            loading="lazy"
+            class="rounded-xl"
+            title={`${r.title} on SoundCloud`}
+          />
+        ) : showBandcampFallback ? (
+          <a
+            href={r.store_links!.bandcamp}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block border border-border rounded-xl bg-surface hover:bg-surface-raised hover:border-accent-dim transition-colors"
+          >
+            <div class="aspect-square flex items-center justify-center p-8 text-center">
+              <div>
+                <p class="text-foreground font-medium mb-1">{r.title}</p>
+                <p class="text-muted text-sm">{artistName}</p>
+                <p class="text-subtle text-xs mt-4">Listen on Bandcamp →</p>
+              </div>
+            </div>
+          </a>
+        ) : null}
+      </div>
+
+    </div>
+
+    <!-- Back link -->
+    <div class="mt-16 pt-8 border-t border-border-muted">
+      <a href={`/artists/${artistId}`} class="text-sm text-muted hover:text-foreground transition-colors">
+        ← {artistName}
+      </a>
+    </div>
+
+  </main>
+</Layout>

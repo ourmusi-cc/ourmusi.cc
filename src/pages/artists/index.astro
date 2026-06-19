@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const artists = await getCollection('artists');
+---
+
+<Layout title="Artists — OurMusi.cc">
+
+  <header class="border-b border-border px-6 py-5 flex items-center justify-between">
+    <a href="/" class="text-base font-semibold tracking-tight text-foreground">OurMusi.cc</a>
+    <nav class="flex gap-6 text-sm text-muted">
+      <a href="/artists"   class="text-foreground">Artists</a>
+      <a href="/releases"  class="hover:text-foreground transition-colors">Releases</a>
+      <a href="/about"     class="hover:text-foreground transition-colors">About</a>
+      <a href="/licensing" class="hover:text-foreground transition-colors">Licensing</a>
+    </nav>
+  </header>
+
+  <main class="px-6 py-16 max-w-3xl">
+    <h1 class="text-3xl font-light tracking-tight text-foreground mb-12">Artists</h1>
+    <div class="grid gap-4 sm:grid-cols-2">
+      {artists.map(artist => (
+        <a
+          href={`/artists/${artist.data.id}`}
+          class="group border border-border rounded-lg p-5 bg-surface hover:bg-surface-raised hover:border-accent-dim transition-colors"
+        >
+          <p class="font-medium text-foreground">{artist.data.display_name}</p>
+          <p class="text-sm text-muted mt-1 line-clamp-2">{artist.data.bio.short}</p>
+          {artist.data.genre_tags && (
+            <div class="flex flex-wrap gap-1 mt-3">
+              {artist.data.genre_tags.map(tag => (
+                <span class="text-xs text-subtle bg-background px-2 py-0.5 rounded">{tag}</span>
+              ))}
+            </div>
+          )}
+        </a>
+      ))}
+    </div>
+  </main>
+
+</Layout>
