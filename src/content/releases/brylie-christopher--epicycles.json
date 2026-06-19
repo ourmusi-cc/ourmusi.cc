@@ -1,0 +1,30 @@
+{
+    "schema_version": "1",
+    "id": "epicycles",
+    "title": "Epicycles",
+    "artist_id": "brylie-christopher",
+    "release_type": "album",
+    "status": "live",
+    "license": "CC BY 4.0",
+    "description": {
+        "short": "Cyclical patterns and recurring musical themes that explore repetition, variation, and the mathematical beauty of orbital motion translated into sound.",
+        "full": "Cyclical patterns and recurring musical themes that explore repetition, variation, and the mathematical beauty of orbital motion translated into sound."
+    },
+    "genre_tags": [
+        "ambient",
+        "electronic",
+        "minimal"
+    ],
+    "dates": {
+        "released": "2024-05-09"
+    },
+    "store_links": {
+        "bandcamp": "https://brylie.bandcamp.com/album/epicycles",
+        "soundcloud": "https://soundcloud.com/brylie/sets/epicycles",
+        "apple_music": "https://music.apple.com/gb/album/epicycles/1747536355",
+        "spotify": "https://open.spotify.com/album/5zRjXYgK3iuhiqGKLReFQc",
+        "fma": "https://freemusicarchive.org/music/Brylie_Christopher_Oxley/epicycles",
+        "subvert_fm": "https://www.subvert.fm/brylie/epicycles"
+    },
+    "created_date": "2026-06-19"
+}

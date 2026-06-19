@@ -1,0 +1,30 @@
+{
+    "schema_version": "1",
+    "id": "itse",
+    "title": "Itse",
+    "artist_id": "brylie-christopher",
+    "release_type": "ep",
+    "status": "live",
+    "license": "CC BY 4.0",
+    "description": {
+        "short": "Celebrating self-reliance and independence while remaining open to connections with others.",
+        "full": "\"Itse\" celebrates self-reliance and independence while remaining open to connections with others."
+    },
+    "genre_tags": [
+        "electronic",
+        "ambient",
+        "experimental"
+    ],
+    "dates": {
+        "released": "2023-08-13"
+    },
+    "store_links": {
+        "soundcloud": "https://soundcloud.com/brylie/sets/itse",
+        "bandcamp": "https://brylie.bandcamp.com/album/itse",
+        "apple_music": "https://music.apple.com/fi/album/itse-ep/1703912054",
+        "spotify": "https://open.spotify.com/album/1LOX3bMGNczudJzjrtaA32",
+        "fma": "https://freemusicarchive.org/music/Brylie_Christopher_Oxley/itse",
+        "subvert_fm": "https://www.subvert.fm/brylie/itse"
+    },
+    "created_date": "2026-06-19"
+}

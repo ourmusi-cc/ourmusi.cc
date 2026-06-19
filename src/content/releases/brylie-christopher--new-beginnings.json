@@ -1,0 +1,30 @@
+{
+    "schema_version": "1",
+    "id": "new-beginnings",
+    "title": "New Beginnings",
+    "artist_id": "brylie-christopher",
+    "release_type": "album",
+    "status": "live",
+    "license": "CC BY 4.0",
+    "description": {
+        "short": "Going where the light leads.",
+        "full": "Going where the light leads."
+    },
+    "genre_tags": [
+        "new age",
+        "ambient",
+        "electronic"
+    ],
+    "dates": {
+        "released": "2025-09-18"
+    },
+    "store_links": {
+        "soundcloud": "https://soundcloud.com/brylie/sets/new-beginnings",
+        "bandcamp": "https://brylie.bandcamp.com/album/new-beginnings",
+        "apple_music": "https://music.apple.com/fi/album/new-beginnings/1841347101",
+        "spotify": "https://open.spotify.com/album/59irjKb2iKUTPFWBMMs6hL",
+        "youtube_music": "https://music.youtube.com/playlist?list=OLAK5uy_m6hWOWtnhYmKoCke493hAafcmldaXU7zc",
+        "fma": "https://freemusicarchive.org/music/Brylie_Christopher_Oxley/new-beginnings"
+    },
+    "created_date": "2026-06-19"
+}

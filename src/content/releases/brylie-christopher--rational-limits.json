@@ -1,0 +1,31 @@
+{
+    "schema_version": "1",
+    "id": "rational-limits",
+    "title": "Rational Limits",
+    "artist_id": "brylie-christopher",
+    "release_type": "single",
+    "status": "live",
+    "license": "CC BY 4.0",
+    "description": {
+        "short": "Ambient, electronic composition blending beats, piano, and choir elements with experimental and minimalist influences.",
+        "full": "Ambient, electronic composition blending beats, piano, and choir elements with experimental and minimalist influences."
+    },
+    "genre_tags": [
+        "ambient",
+        "electronic",
+        "IDM",
+        "experimental",
+        "minimalism"
+    ],
+    "dates": {
+        "released": "2022-12-31"
+    },
+    "store_links": {
+        "bandcamp": "https://brylie.bandcamp.com/album/rational-limits",
+        "apple_music": "https://music.apple.com/fi/album/rational-limits-single/1666678621",
+        "spotify": "https://open.spotify.com/album/7LKyABBYOyyW13lR8XkysZ",
+        "fma": "https://freemusicarchive.org/music/Brylie_Christopher_Oxley/rational-limits-1",
+        "subvert_fm": "https://www.subvert.fm/brylie/rational-limits"
+    },
+    "created_date": "2026-06-19"
+}

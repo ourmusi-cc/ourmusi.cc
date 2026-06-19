@@ -1,0 +1,30 @@
+{
+    "schema_version": "1",
+    "id": "sojourn",
+    "title": "Sojourn",
+    "artist_id": "brylie-christopher",
+    "release_type": "ep",
+    "status": "live",
+    "license": "CC BY 4.0",
+    "description": {
+        "short": "Meditations in transition.",
+        "full": "Meditations in transition."
+    },
+    "genre_tags": [
+        "ambient",
+        "electronic",
+        "experimental"
+    ],
+    "dates": {
+        "released": "2025-12-31"
+    },
+    "store_links": {
+        "soundcloud": "https://soundcloud.com/brylie/sets/sojourn",
+        "bandcamp": "https://brylie.bandcamp.com/album/sojourn",
+        "apple_music": "https://music.apple.com/fi/album/sojourn-ep/1865487998",
+        "spotify": "https://open.spotify.com/album/5mpSyCDu0eckN49060b67C",
+        "youtube_music": "https://music.youtube.com/playlist?list=OLAK5uy_lZsUkLJT3HB3G1hxWLLQEko2Ljb13_7Lg",
+        "fma": "https://freemusicarchive.org/music/Brylie_Christopher_Oxley/sojourn"
+    },
+    "created_date": "2026-06-19"
+}

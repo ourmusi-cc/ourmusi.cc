@@ -1,0 +1,30 @@
+{
+    "schema_version": "1",
+    "id": "solo",
+    "title": "Solo",
+    "artist_id": "brylie-christopher",
+    "release_type": "album",
+    "status": "live",
+    "license": "CC BY 4.0",
+    "description": {
+        "short": "Refined piano impressionism, featuring delicate compositions that explore introspective themes through minimalist piano techniques.",
+        "full": "Refined piano impressionism, featuring delicate compositions that explore introspective themes through minimalist piano techniques."
+    },
+    "genre_tags": [
+        "piano",
+        "impressionism",
+        "contemporary classical"
+    ],
+    "dates": {
+        "released": "2025-05-01"
+    },
+    "store_links": {
+        "soundcloud": "https://soundcloud.com/brylie/sets/solo",
+        "bandcamp": "https://brylie.bandcamp.com/album/solo",
+        "apple_music": "https://music.apple.com/fi/album/solo/1819288691",
+        "spotify": "https://open.spotify.com/album/04UHRUCtmvoSAnDNBucEWw",
+        "fma": "https://freemusicarchive.org/music/Brylie_Christopher_Oxley/solo",
+        "subvert_fm": "https://www.subvert.fm/brylie/solo"
+    },
+    "created_date": "2026-06-19"
+}

@@ -1,0 +1,30 @@
+{
+    "schema_version": "1",
+    "id": "good-medicine",
+    "title": "Good Medicine",
+    "artist_id": "brylie-christopher",
+    "release_type": "album",
+    "status": "live",
+    "license": "CC BY 4.0",
+    "description": {
+        "short": "Gentle piano from a place of recovery.",
+        "full": "Gentle piano from a place of recovery."
+    },
+    "genre_tags": [
+        "new age",
+        "ambient",
+        "electronic"
+    ],
+    "dates": {
+        "released": "2026-01-30"
+    },
+    "store_links": {
+        "bandcamp": "https://brylie.bandcamp.com/album/good-medicine",
+        "soundcloud": "https://soundcloud.com/brylie/sets/good-medicine",
+        "apple_music": "https://music.apple.com/fi/album/good-medicine/1870527931",
+        "spotify": "https://open.spotify.com/album/7HochmsbV1KwvhUW9fvTdb",
+        "youtube_music": "https://www.youtube.com/playlist?list=OLAK5uy_l61cGk_zfSofe5nplLsbk1p1-q1QgzmrE",
+        "fma": "https://freemusicarchive.org/music/Brylie_Christopher_Oxley/good-medicine"
+    },
+    "created_date": "2026-06-19"
+}

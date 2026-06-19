@@ -6,33 +6,35 @@ Built with [Astro](https://astro.build) and managed with [Open Virtual Label](ht
 
 ## Content
 
-Artist and release data lives in the OVL workspace at `../../../workspace/` — not in this repository. Before building, run the sync script to copy current workspace records into Astro's content collections:
+Artist and release data is stored in `src/content/artists/` and `src/content/releases/` as JSON files. These are committed to the repository and built directly by Astro.
+
+The canonical source of truth for this data is the [Open Virtual Label](https://github.com/open-virtual-label/ovl) workspace at `../../../workspace/` (in the monorepo). After updating workspace records, sync the changes into this site before committing:
 
 ```bash
 bash scripts/sync-content.sh
+git add src/content/
+git commit -m "sync: update content from workspace"
 ```
 
-This populates `src/content/artists/` and `src/content/releases/` from the workspace JSON files. These directories are gitignored — they are always generated, never edited directly.
+Never edit files in `src/content/` directly — edit the workspace records and sync.
 
 ## Development
 
 ```bash
 npm install
-bash scripts/sync-content.sh
 npm run dev        # http://localhost:4321
 ```
 
 ## Build
 
 ```bash
-bash scripts/sync-content.sh
 npm run build
 npm run preview    # preview production build locally
 ```
 
 ## Deployment
 
-Pushing to `main` triggers the GitHub Actions workflow at `.github/workflows/deploy.yml`, which runs `sync-content.sh` and deploys to GitHub Pages.
+Pushing to `main` triggers the GitHub Actions workflow at `.github/workflows/deploy.yml`, which builds and deploys to GitHub Pages. Content is already committed, so no workspace access is needed in CI.
 
 ## Project structure
 

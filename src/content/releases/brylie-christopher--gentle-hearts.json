@@ -1,0 +1,25 @@
+{
+    "schema_version": "1",
+    "id": "gentle-hearts",
+    "title": "Gentle Hearts EP",
+    "artist_id": "brylie-christopher",
+    "release_type": "ep",
+    "status": "live",
+    "license": "CC BY 4.0",
+    "description": {
+        "short": "Debut release exploring gentle ambient electronic textures and minimal soundscapes with intelligent dance music influences.",
+        "full": "My debut release exploring gentle ambient electronic textures and minimal soundscapes with intelligent dance music influences."
+    },
+    "genre_tags": [
+        "ambient electronic",
+        "minimal electronic",
+        "IDM"
+    ],
+    "dates": {
+        "released": "2018-07-08"
+    },
+    "store_links": {
+        "fma": "https://freemusicarchive.org/music/Brylie_Christopher_Oxley/Gentle_Hearts_EP"
+    },
+    "created_date": "2026-06-19"
+}

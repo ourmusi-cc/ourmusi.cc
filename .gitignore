@@ -23,10 +23,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# Generated content — populated by scripts/sync-content.sh before build
-src/content/artists/
-src/content/releases/
-
 # Default Astro boilerplate (to be removed)
 src/assets/astro.svg
 src/assets/background.svg

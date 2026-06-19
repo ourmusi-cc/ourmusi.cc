@@ -1,0 +1,30 @@
+{
+    "schema_version": "1",
+    "id": "murmurations",
+    "title": "Murmurations",
+    "artist_id": "brylie-christopher",
+    "release_type": "album",
+    "status": "live",
+    "license": "CC BY 4.0",
+    "description": {
+        "short": "Collective movements in sound and harmony, inspired by the synchronized flight patterns of birds.",
+        "full": "Collective movements in sound and harmony, inspired by the synchronized flight patterns of birds, expressed through layered electronic textures and organic harmonies."
+    },
+    "genre_tags": [
+        "ambient",
+        "electronic",
+        "generative"
+    ],
+    "dates": {
+        "released": "2024-07-31"
+    },
+    "store_links": {
+        "soundcloud": "https://soundcloud.com/brylie/sets/murmurations",
+        "bandcamp": "https://brylie.bandcamp.com/album/murmurations",
+        "apple_music": "https://music.apple.com/fi/album/murmurations/1760424222",
+        "spotify": "https://open.spotify.com/album/4QhCY6CVzTSCYhbWQTEleA",
+        "fma": "https://freemusicarchive.org/music/Brylie_Christopher_Oxley/murmurations",
+        "subvert_fm": "https://www.subvert.fm/brylie/murmurations"
+    },
+    "created_date": "2026-06-19"
+}

@@ -1,0 +1,29 @@
+{
+    "schema_version": "1",
+    "id": "liminal-space",
+    "title": "Liminal Space",
+    "artist_id": "brylie-christopher",
+    "release_type": "ep",
+    "status": "live",
+    "license": "CC BY 4.0",
+    "description": {
+        "short": "Created during a transition period, exploring themes of love, life, and relationships through jazz-infused electronic and synth pop soundscapes.",
+        "full": "Created during a transition period, this EP explores themes of love, life, and relationships through jazz-infused electronic and synth pop soundscapes."
+    },
+    "genre_tags": [
+        "jazz",
+        "electronic",
+        "synth pop"
+    ],
+    "dates": {
+        "released": "2023-05-07"
+    },
+    "store_links": {
+        "bandcamp": "https://brylie.bandcamp.com/album/liminal-space",
+        "apple_music": "https://music.apple.com/fi/album/liminal-space-ep/1694224333",
+        "spotify": "https://open.spotify.com/album/0DifRtnVDLsYzfqipMpjoW",
+        "fma": "https://freemusicarchive.org/music/Brylie_Christopher_Oxley/liminal-space",
+        "subvert_fm": "https://www.subvert.fm/brylie/liminal-space"
+    },
+    "created_date": "2026-06-19"
+}
