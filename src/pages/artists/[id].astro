@@ -22,15 +22,17 @@ const releases = allReleases
 
 const { data: a } = artist;
 
+// Official site first, then streaming, then social
 const platformLinks = [
-  a.platforms?.bandcamp_url      && { label: 'Bandcamp',      url: a.platforms.bandcamp_url },
-  a.platforms?.spotify_artist_id && { label: 'Spotify',       url: `https://open.spotify.com/artist/${a.platforms.spotify_artist_id}` },
+  a.contact?.website             && { label: 'Official site',  url: a.contact.website },
+  a.platforms?.bandcamp_url      && { label: 'Bandcamp',       url: a.platforms.bandcamp_url },
+  a.platforms?.spotify_artist_id && { label: 'Spotify',        url: `https://open.spotify.com/artist/${a.platforms.spotify_artist_id}` },
   a.platforms?.apple_music_artist_id && { label: 'Apple Music', url: `https://music.apple.com/artist/${a.platforms.apple_music_artist_id}` },
-  a.platforms?.soundcloud_url    && { label: 'SoundCloud',    url: a.platforms.soundcloud_url },
-  a.platforms?.subvert_fm_url    && { label: 'Subvert.fm',    url: a.platforms.subvert_fm_url },
-  a.platforms?.youtube_channel_id && { label: 'YouTube',      url: `https://www.youtube.com/channel/${a.platforms.youtube_channel_id}` },
-  a.platforms?.instagram_handle  && { label: 'Instagram',     url: `https://instagram.com/${a.platforms.instagram_handle}` },
-  a.platforms?.facebook_url      && { label: 'Facebook',      url: a.platforms.facebook_url },
+  a.platforms?.soundcloud_url    && { label: 'SoundCloud',     url: a.platforms.soundcloud_url },
+  a.platforms?.subvert_fm_url    && { label: 'Subvert.fm',     url: a.platforms.subvert_fm_url },
+  a.platforms?.youtube_channel_id && { label: 'YouTube',       url: `https://www.youtube.com/channel/${a.platforms.youtube_channel_id}` },
+  a.platforms?.instagram_handle  && { label: 'Instagram',      url: `https://instagram.com/${a.platforms.instagram_handle}` },
+  a.platforms?.facebook_url      && { label: 'Facebook',       url: a.platforms.facebook_url },
 ].filter(Boolean) as { label: string; url: string }[];
 ---
 
