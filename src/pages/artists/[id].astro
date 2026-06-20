@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
 import { getCollection, getEntry } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -30,33 +32,38 @@ const platformLinks = [
   a.platforms?.apple_music_artist_id && { label: 'Apple Music', url: `https://music.apple.com/artist/${a.platforms.apple_music_artist_id}` },
   a.platforms?.soundcloud_url    && { label: 'SoundCloud',     url: a.platforms.soundcloud_url },
   a.platforms?.subvert_fm_url    && { label: 'Subvert.fm',     url: a.platforms.subvert_fm_url },
+  a.platforms?.fma_url           && { label: 'Free Music Archive', url: a.platforms.fma_url },
   a.platforms?.youtube_channel_id && { label: 'YouTube',       url: `https://www.youtube.com/channel/${a.platforms.youtube_channel_id}` },
   a.platforms?.instagram_handle  && { label: 'Instagram',      url: `https://instagram.com/${a.platforms.instagram_handle}` },
   a.platforms?.facebook_url      && { label: 'Facebook',       url: a.platforms.facebook_url },
 ].filter(Boolean) as { label: string; url: string }[];
+
+const artistSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicGroup',
+  name: a.display_name,
+  description: a.bio.short,
+  genre: a.genre_tags,
+  url: Astro.url.href,
+  sameAs: platformLinks.map(p => p.url),
+};
 ---
 
 <Layout title={`${a.display_name} — OurMusi.cc`} description={a.bio.short}>
+  <script type="application/ld+json" set:html={JSON.stringify(artistSchema)} />
 
-  <!-- Header -->
-  <header class="border-b border-border px-6 py-5 flex items-center justify-between">
-    <a href="/" class="text-base font-semibold tracking-tight text-foreground">OurMusi.cc</a>
-    <nav class="flex gap-6 text-sm text-muted">
-      <a href="/artists"   class="hover:text-foreground transition-colors">Artists</a>
-      <a href="/releases"  class="hover:text-foreground transition-colors">Releases</a>
-      <a href="/about"     class="hover:text-foreground transition-colors">About</a>
-      <a href="/licensing" class="hover:text-foreground transition-colors">Licensing</a>
-    </nav>
-  </header>
+  <Header />
 
-  <main class="px-6 py-16 max-w-3xl">
+  <main id="main" class="px-6 py-16 max-w-3xl">
 
     <!-- Breadcrumb -->
-    <p class="text-sm text-subtle mb-8">
-      <a href="/artists" class="hover:text-muted transition-colors">Artists</a>
-      <span class="mx-2">›</span>
-      <span class="text-muted">{a.display_name}</span>
-    </p>
+    <nav aria-label="Breadcrumb" class="text-sm text-subtle mb-8">
+      <ol class="flex items-center">
+        <li><a href="/artists" class="hover:text-muted transition-colors">Artists</a></li>
+        <li><span class="mx-2" aria-hidden="true">›</span></li>
+        <li><span class="text-muted" aria-current="page">{a.display_name}</span></li>
+      </ol>
+    </nav>
 
     <!-- Name + tags -->
     <h1 class="text-3xl font-light tracking-tight text-foreground mb-3">{a.display_name}</h1>
@@ -81,7 +88,7 @@ const platformLinks = [
             rel="noopener noreferrer"
             class="text-sm text-muted border border-border px-4 py-1.5 rounded hover:border-accent-dim hover:text-foreground transition-colors"
           >
-            {label}
+            {label}<span class="sr-only"> (opens in new tab)</span>
           </a>
         ))}
       </div>
@@ -116,5 +123,7 @@ const platformLinks = [
     )}
 
   </main>
+
+  <Footer />
 
 </Layout>

@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout
@@ -7,24 +9,15 @@ import Layout from '../layouts/Layout.astro';
   description="How Creative Commons licensing works for music on OurMusi.cc, and what you can do with it."
 >
 
-  <!-- Header -->
-  <header class="border-b border-border px-6 py-5 flex items-center justify-between">
-    <a href="/" class="text-base font-semibold tracking-tight text-foreground">OurMusi.cc</a>
-    <nav class="flex gap-6 text-sm text-muted">
-      <a href="/artists"   class="hover:text-foreground transition-colors">Artists</a>
-      <a href="/releases"  class="hover:text-foreground transition-colors">Releases</a>
-      <a href="/about"     class="hover:text-foreground transition-colors">About</a>
-      <a href="/licensing" class="text-foreground">Licensing</a>
-    </nav>
-  </header>
+  <Header />
 
-  <main class="px-6 py-16 max-w-2xl">
+  <main id="main" class="px-6 py-16 max-w-2xl">
 
     <h1 class="text-3xl font-light tracking-tight text-foreground mb-4">Licensing</h1>
     <p class="text-muted leading-relaxed mb-12">
       All music on OurMusi.cc is released under
       <a href="https://creativecommons.org" target="_blank" rel="noopener noreferrer"
-         class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">Creative Commons</a>
+         class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">Creative Commons<span class="sr-only"> (opens in new tab)</span></a>
       licenses. Here's what that means in practice.
     </p>
 
@@ -52,7 +45,7 @@ import Layout from '../layouts/Layout.astro';
           <div class="flex items-baseline justify-between mb-2">
             <h3 class="font-medium text-foreground">CC BY 4.0</h3>
             <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer"
-               class="text-xs text-subtle hover:text-muted transition-colors">Full license ↗</a>
+               class="text-xs text-subtle hover:text-muted transition-colors">Full license <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span></a>
           </div>
           <p class="text-sm text-muted leading-relaxed mb-3">
             Use, share, remix, or build on the work for any purpose — including commercially —
@@ -68,7 +61,7 @@ import Layout from '../layouts/Layout.astro';
           <div class="flex items-baseline justify-between mb-2">
             <h3 class="font-medium text-foreground">CC BY-SA 4.0</h3>
             <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer"
-               class="text-xs text-subtle hover:text-muted transition-colors">Full license ↗</a>
+               class="text-xs text-subtle hover:text-muted transition-colors">Full license <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span></a>
           </div>
           <p class="text-sm text-muted leading-relaxed mb-3">
             Same as CC BY, with one addition: if you remix or adapt the work, your version must
@@ -84,7 +77,7 @@ import Layout from '../layouts/Layout.astro';
           <div class="flex items-baseline justify-between mb-2">
             <h3 class="font-medium text-foreground">CC0</h3>
             <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer"
-               class="text-xs text-subtle hover:text-muted transition-colors">Full license ↗</a>
+               class="text-xs text-subtle hover:text-muted transition-colors">Full license <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span></a>
           </div>
           <p class="text-sm text-muted leading-relaxed mb-3">
             The artist waives all rights. No attribution required. Use it however you like.
@@ -130,7 +123,7 @@ import Layout from '../layouts/Layout.astro';
       <p class="text-muted leading-relaxed">
         If you're unsure whether your use is covered, the
         <a href="https://creativecommons.org/faq/" target="_blank" rel="noopener noreferrer"
-           class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">Creative Commons FAQ</a>
+           class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">Creative Commons FAQ<span class="sr-only"> (opens in new tab)</span></a>
         answers most cases. You're also welcome to
         <a href="mailto:brylie.oxley@gmail.com?subject=Licensing%20question"
            class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">get in touch</a>
@@ -139,5 +132,7 @@ import Layout from '../layouts/Layout.astro';
     </section>
 
   </main>
+
+  <Footer />
 
 </Layout>

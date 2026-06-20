@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
 
 const artists = await getCollection('artists');
@@ -10,18 +12,9 @@ const artists = await getCollection('artists');
   description="OurMusi.cc is an independent label for artists publishing music under Creative Commons licenses, with a preference for Free Cultural Works."
 >
 
-  <!-- Header -->
-  <header class="border-b border-border px-6 py-5 flex items-center justify-between">
-    <a href="/" class="text-base font-semibold tracking-tight text-foreground">OurMusi.cc</a>
-    <nav class="flex gap-6 text-sm text-muted">
-      <a href="/artists"   class="hover:text-foreground transition-colors">Artists</a>
-      <a href="/releases"  class="hover:text-foreground transition-colors">Releases</a>
-      <a href="/about"     class="text-foreground">About</a>
-      <a href="/licensing" class="hover:text-foreground transition-colors">Licensing</a>
-    </nav>
-  </header>
+  <Header />
 
-  <main class="px-6 py-16 max-w-2xl">
+  <main id="main" class="px-6 py-16 max-w-2xl">
 
     <h1 class="text-3xl font-light tracking-tight text-foreground mb-10">About OurMusi.cc</h1>
 
@@ -35,7 +28,7 @@ const artists = await getCollection('artists');
           target="_blank"
           rel="noopener noreferrer"
           class="text-foreground underline underline-offset-2 hover:text-accent transition-colors"
-        >Creative Commons</a> licenses.
+        >Creative Commons<span class="sr-only"> (opens in new tab)</span></a> licenses.
         We believe music is more valuable when it can move freely — into podcasts, films,
         games, classrooms, and community spaces — with nothing required from the listener
         beyond giving credit.
@@ -56,7 +49,7 @@ const artists = await getCollection('artists');
           target="_blank"
           rel="noopener noreferrer"
           class="text-foreground underline underline-offset-2 hover:text-accent transition-colors"
-        >Free Cultural Works</a> — a standard that goes a step further than standard Creative Commons.
+        >Free Cultural Works<span class="sr-only"> (opens in new tab)</span></a> — a standard that goes a step further than standard Creative Commons.
         A work qualifies when it can be freely used, studied, copied, modified, and redistributed
         by anyone, for any purpose, without restriction.
       </p>
@@ -78,7 +71,7 @@ const artists = await getCollection('artists');
               target="_blank"
               rel="noopener noreferrer"
               class="text-sm font-medium text-foreground underline underline-offset-2 hover:text-accent transition-colors shrink-0"
-            >{name}</a>
+            >{name}<span class="sr-only"> (opens in new tab)</span></a>
             <span class="text-sm text-subtle">{desc}</span>
           </li>
         ))}
@@ -132,9 +125,9 @@ const artists = await getCollection('artists');
       <h2 class="text-xs uppercase tracking-widest text-subtle mb-4">This site</h2>
       <p class="text-muted leading-relaxed">
         OurMusi.cc is built with
-        <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">Astro</a>
+        <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">Astro<span class="sr-only"> (opens in new tab)</span></a>
         and managed with
-        <a href="https://github.com/open-virtual-label/ovl" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">Open Virtual Label</a>,
+        <a href="https://github.com/open-virtual-label/ovl" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">Open Virtual Label<span class="sr-only"> (opens in new tab)</span></a>,
         an open-source tool for independent musicians.
         The site's code is MIT licensed; all content is
         <a href="/licensing" class="text-foreground underline underline-offset-2 hover:text-accent transition-colors">CC BY 4.0</a>.
@@ -142,5 +135,7 @@ const artists = await getCollection('artists');
     </section>
 
   </main>
+
+  <Footer />
 
 </Layout>

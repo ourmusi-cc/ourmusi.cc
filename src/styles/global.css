@@ -17,7 +17,7 @@
   /* ── Text ────────────────────────────────────────────────── */
   --color-foreground:     #dce8d8;  /* primary text — warm leaf    */
   --color-muted:          #7a9b7e;  /* secondary text — moss       */
-  --color-subtle:         #4a6b4e;  /* placeholder, disabled       */
+  --color-subtle:         #5f8a65;  /* placeholder, disabled — meets 4.5:1 on background */
 
   /* ── Accent ──────────────────────────────────────────────── */
   --color-accent:         #6db872;  /* sage green — links, focus   */
@@ -40,6 +40,12 @@
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 
   ::selection {

@@ -1,5 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
 import { getCollection, getEntry } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -65,6 +67,16 @@ const albumSchema = {
   license: licenseUrl,
   url: Astro.url.href,
 };
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Artists', item: new URL('/artists', Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: artistName, item: new URL(`/artists/${artistId}`, Astro.site).href },
+    { '@type': 'ListItem', position: 3, name: r.title, item: Astro.url.href },
+  ],
+};
 ---
 
 <Layout
@@ -72,28 +84,22 @@ const albumSchema = {
   description={r.description?.short}
 >
   <script type="application/ld+json" set:html={JSON.stringify(albumSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
-  <!-- Header -->
-  <header class="border-b border-border px-6 py-5 flex items-center justify-between">
-    <a href="/" class="text-base font-semibold tracking-tight text-foreground">OurMusi.cc</a>
-    <nav class="flex gap-6 text-sm text-muted">
-      <a href="/artists"   class="hover:text-foreground transition-colors">Artists</a>
-      <a href="/releases"  class="hover:text-foreground transition-colors">Releases</a>
-      <a href="/about"     class="hover:text-foreground transition-colors">About</a>
-      <a href="/licensing" class="hover:text-foreground transition-colors">Licensing</a>
-    </nav>
-  </header>
+  <Header />
 
-  <main class="px-6 py-16 max-w-3xl">
+  <main id="main" class="px-6 py-16 max-w-3xl">
 
     <!-- Breadcrumb -->
-    <p class="text-sm text-subtle mb-10">
-      <a href="/artists" class="hover:text-muted transition-colors">Artists</a>
-      <span class="mx-2">›</span>
-      <a href={`/artists/${artistId}`} class="hover:text-muted transition-colors">{artistName}</a>
-      <span class="mx-2">›</span>
-      <span class="text-muted">{r.title}</span>
-    </p>
+    <nav aria-label="Breadcrumb" class="text-sm text-subtle mb-10">
+      <ol class="flex items-center">
+        <li><a href="/artists" class="hover:text-muted transition-colors">Artists</a></li>
+        <li><span class="mx-2" aria-hidden="true">›</span></li>
+        <li><a href={`/artists/${artistId}`} class="hover:text-muted transition-colors">{artistName}</a></li>
+        <li><span class="mx-2" aria-hidden="true">›</span></li>
+        <li><span class="text-muted" aria-current="page">{r.title}</span></li>
+      </ol>
+    </nav>
 
     <div class="grid gap-12 md:grid-cols-[1fr_280px] md:items-start">
 
@@ -132,8 +138,8 @@ const albumSchema = {
                   rel="noopener noreferrer"
                   class="flex items-center justify-between border border-border rounded-lg px-4 py-3 bg-surface hover:bg-surface-raised hover:border-accent-dim transition-colors group"
                 >
-                  <span class="text-sm font-medium text-foreground">{label}</span>
-                  <span class="text-subtle group-hover:text-muted transition-colors text-xs">→</span>
+                  <span class="text-sm font-medium text-foreground">{label}<span class="sr-only"> (opens in new tab)</span></span>
+                  <span class="text-subtle group-hover:text-muted transition-colors text-xs" aria-hidden="true">→</span>
                 </a>
               ))}
             </div>
@@ -149,7 +155,7 @@ const albumSchema = {
             rel="noopener noreferrer"
             class="text-muted hover:text-foreground underline underline-offset-2 transition-colors"
           >
-            {r.license}
+            {r.license}<span class="sr-only"> (opens in new tab)</span>
           </a>
           {' '}— free to use with attribution.
         </p>
@@ -203,9 +209,12 @@ const albumSchema = {
     <!-- Back link -->
     <div class="mt-16 pt-8 border-t border-border-muted">
       <a href={`/artists/${artistId}`} class="text-sm text-muted hover:text-foreground transition-colors">
-        ← {artistName}
+        <span aria-hidden="true">←</span> {artistName}
       </a>
     </div>
 
   </main>
+
+  <Footer />
+
 </Layout>

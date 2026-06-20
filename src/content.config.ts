@@ -41,6 +41,7 @@ const artists = defineCollection({
       instagram_handle: z.string().optional(),
       facebook_url: z.string().url().optional(),
       subvert_fm_url: z.string().url().optional(),
+      fma_url: z.string().url().optional(),
     }).optional(),
     members: z.array(z.string()).optional(),
     created_date: z.string(),
