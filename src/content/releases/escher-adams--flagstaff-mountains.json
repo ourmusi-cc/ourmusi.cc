@@ -1,0 +1,22 @@
+{
+    "schema_version": "1",
+    "id": "flagstaff-mountains",
+    "title": "Flagstaff Mountains",
+    "artist_id": "escher-adams",
+    "release_type": "ep",
+    "status": "live",
+    "license": "CC BY 4.0",
+    "description": {
+        "short": "Experimental electronic music via Eurorack modular synthesis. Dedicated to Kendra.",
+        "full": "Experimental electronic music via Eurorack modular synthesis. Dedicated to Kendra."
+    },
+    "genre_tags": ["experimental electronic", "ambient electronic", "modular", "modular synthesis"],
+    "dates": {
+        "released": "2021-05-09"
+    },
+    "store_links": {
+        "bandcamp": "https://escheradams.bandcamp.com/album/flagstaff-mountains",
+        "fma": "https://freemusicarchive.org/music/escher-adams/flagstaff-mountains"
+    },
+    "created_date": "2026-06-20"
+}

@@ -48,6 +48,7 @@ const artists = defineCollection({
 });
 
 // Mirrors workspace/artists/*/releases/*/release.json
+// Status values must match the OVL release schema exactly — OVL is canonical.
 const releases = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/content/releases' }),
   schema: z.object({
@@ -56,16 +57,24 @@ const releases = defineCollection({
     title: z.string(),
     artist_id: z.string(),
     release_type: z.enum(['album', 'ep', 'single', 'compilation']),
-    status: z.enum(['draft', 'mastering', 'submitted', 'live', 'archived']),
+    status: z.enum(['in-production', 'mastering', 'qc', 'ready', 'submitted', 'live', 'archived']),
     license: z.string(),
     description: z.object({
       short: z.string().optional(),
       full: z.string().optional(),
     }).optional(),
     genre_tags: z.array(z.string()).optional(),
+    tracks: z.array(z.string()).optional(),
     dates: z.object({
-      released: z.string().optional(),
+      target_release: z.string().optional(),
+      distributor_submission_deadline: z.string().optional(),
       submitted: z.string().optional(),
+      released: z.string().optional(),
+    }).optional(),
+    distribution: z.object({
+      distributor: z.string().optional(),
+      upc: z.string().optional(),
+      catalog_number: z.string().optional(),
     }).optional(),
     store_links: z.object({
       bandcamp: z.string().url().optional(),
@@ -73,6 +82,8 @@ const releases = defineCollection({
       apple_music: z.string().url().optional(),
       spotify: z.string().url().optional(),
       youtube_music: z.string().url().optional(),
+      tidal: z.string().url().optional(),
+      amazon_music: z.string().url().optional(),
       fma: z.string().url().optional(),
       subvert_fm: z.string().url().optional(),
     }).optional(),
