@@ -2,17 +2,23 @@
     "schema_version": "1",
     "id": "escher-adams",
     "display_name": "Escher Adams",
-    "also_known_as": [],
+    "members": [
+        "brylie-christopher"
+    ],
     "bio": {
         "short": "Two brothers making experimental electronic music via Eurorack modular synthesis.",
         "medium": "Escher Adams is a collaborative project between two brothers exploring experimental electronic music through Eurorack modular synthesis. Their debut EP Flagstaff Mountains was released in 2021 as a free download under Creative Commons."
     },
-    "genre_tags": ["experimental electronic", "ambient electronic", "modular synthesis"],
-    "members": ["brylie-christopher"],
+    "genre_tags": [
+        "experimental electronic",
+        "ambient electronic",
+        "modular synthesis"
+    ],
     "location": "Finland",
     "default_license": "CC BY 4.0",
     "platforms": {
-        "bandcamp_url": "https://escheradams.bandcamp.com"
+        "bandcamp_url": "https://escheradams.bandcamp.com",
+        "fma_url": "https://freemusicarchive.org/music/escher-adams"
     },
     "created_date": "2026-06-20"
 }
